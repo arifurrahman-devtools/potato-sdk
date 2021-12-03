@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">962494345669</string>
+  <string name="google_storage_bucket" translatable="false">ballet-test.appspot.com</string>
+  <string name="project_id" translatable="false">ballet-test</string>
+  <string name="google_api_key" translatable="false">AIzaSyDM9KkdshzL2SmRR1-5EF_C-smFoDMgM1M</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDM9KkdshzL2SmRR1-5EF_C-smFoDMgM1M</string>
+  <string name="google_app_id" translatable="false">1:962494345669:android:73b2f3117c0da0d8821bac</string>
+  <string name="default_web_client_id" translatable="false">962494345669-k08is9ka9kg29998lj0rvsdugf895kv5.apps.googleusercontent.com</string>
+</resources>

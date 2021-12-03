@@ -1,0 +1,36 @@
+{
+  "project_info": {
+    "project_number": "962494345669",
+    "project_id": "ballet-test",
+    "storage_bucket": "ballet-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962494345669:ios:e386f96db89e5c42821bac",
+        "android_client_info": {
+          "package_name": "com.alphapotato.battleballet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962494345669-edrqjl7jjfp1kfvk548c7panoo4051am.apps.googleusercontent.com"
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDxV0aFqwkLNpQa84bUpXY_G3gYvj4mPw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
