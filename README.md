@@ -65,7 +65,7 @@ Potato SDK does not contain a wrapper for Lion Analytics. If you need to use Lio
 * PotatoSDK provides a loading `splash scene` which **is recommended** to use. Depending on whether you are using it or not you have
   * **Without Loading Scene:**  You have to make sure that the `Potato.isReady` flag is true before making any calls on LionAnalytics.
   * **With Loading Scene:** In this case you can safely make the calls to LionAnalytics on any scene loaded afterward. But if you choose to extend the provided loading scene, you still have to check if `Potato.isReady` is true.
-
+---
 ### SDK Walkthroughs
 Here are links to specific integration and testing walkthroughs. The SDKs in question are primarily documented for the android platform, additional steps for iOS are noted in the next section.
 * Facebook
@@ -105,5 +105,15 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
 ### iOS Build Guidelines:
 Additional steps while building for iOS are noted in this section. It's recommended that you stabilize your android build prior to moving to iOS.
 
-#### Standard iOS Build Process:
+#### About the recommended iOS Build Process:
 This process is recommended since this can avoid some common issues in a more automated process and also makes some issues more solvable. (for example “broken pod installation” avoiding, “FB Lexical Preprocessor” solve)
+
+#### First Time Build Specific:
+* Minimal mandatory MAX integration: You must have max sdk integrated (even if you are not using ads right now) fill up the details as follows:
+  ![alt text](image.jpg)
+  * SDK Key : “Lzi5VR_J50y55PM5ctwAwALT5d9g1CKMhT1TF0naOa4fSUn98Vd6rXsvAp4I3A-5LaPvNk4RSvKe5fesxKhRzh”
+  * Privacy URL : “https://lionstudios.cc/privacy/”
+  * Terms URL : “https://lionstudios.cc/terms/”
+  * Enable Facebook mediated network in max
+  * Activate the potatoSDK MAX wrapper.  
+
