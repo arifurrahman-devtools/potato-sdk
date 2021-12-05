@@ -29,11 +29,22 @@ This repository is maintained with the motivation of making SDK integration easi
 * And if it does, check if you already have one of them(and which version) in your projects.
 * You have to keep in mind that PSR is a lower version of EDM.
 * Check for the following situations.
-  * Your project has Lower version of EDM/PSR than the SDK:
+  * Your **project has Lower version** of EDM/PSR than the SDK:
     * First, delete the EDM/PSR folder,
     * Then import the new sdk
-  * Your project has Higher version of EDM than the SDK:
+  * Your **project has Higher version** of EDM than the SDK:**
     * While importing the SDK, uncheck the EDM/PSR folder then import it.
+
+### About Analytics:
+The analytics platforms that are used for games are constantly changing. On the other hand,  specific calls and its format can vary from game to game. Thus, for analytics calls you will have to make your calls according to the documentation of each SDK that you need (Potato SDK doesn't have a wrapper for common analytics calls, but will handle initialization of  the SDKs). You need to`verify with your PM` which analytics logs you need to send (and to which platform). As of `29/10/21` we are only required to make calls using  “Lion Analytics”. 
+
+#### About Lion Analytics and PotatoSDK:
+Potato SDK does not contain a wrapper for Lion Analytics. If you need to use Lion Analytics you have to follow the most current guidelines provided by Lion (ask your PM).  However, while using the Lion Analytics with PotatoSDK as of  `29/10/21`, the following rules apply,
+* `Firebase sdk and LionAnalytics don't work with each other` properly as of 29/10/2021. Please refrain from adding both sdks at the same time. Or discuss with your PM
+* PotatoSDK provides a loading `splash scene` which **is recommended** to use. Depending on whether you are using it or not you have
+  * **Without Loading Scene:**  You have to make sure that the `Potato.isReady` flag is true before making any calls on LionAnalytics.
+  * **With Loading Scene:** In this case you can safely make the calls to LionAnalytics on any scene loaded afterward. But if you choose to extend the provided loading scene, you still have to check if `Potato.isReady` is true.
+
 
 ## Android Build Guidelines
 #### Situations to Delete and Resolve Libraries
@@ -48,7 +59,7 @@ If any of the situations arise please make sure you do the following:
 * Assets/External Dependency Manager or Play Service Resolver/Android Resolver/ Resolve
 
 #### Before Build Submission
-* Your android manifest must have the following attribute inside its application element. android:debuggable="false"
+* Your android manifest must have the following attribute inside its application element. `android:debuggable="false"`
 * Max Upgrade: If applicable upgrade max plugin, and all the mediated network that needs upgrade.After that delete all resolved libraries and resolve again.
 
 
