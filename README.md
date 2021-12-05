@@ -122,6 +122,7 @@ This process is recommended since this can avoid some common issues in a more au
 
 #### First Time Build Specific:
 * Minimal mandatory MAX integration: You must have max sdk integrated (even if you are not using ads right now) fill up the details as follows:
+  
   ![MAX sdk settings](readme_images/max_ready.png)
   * SDK Key : “Lzi5VR_J50y55PM5ctwAwALT5d9g1CKMhT1TF0naOa4fSUn98Vd6rXsvAp4I3A-5LaPvNk4RSvKe5fesxKhRzh”
   * Privacy URL : “https://lionstudios.cc/privacy/”
