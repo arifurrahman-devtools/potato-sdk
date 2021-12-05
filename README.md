@@ -13,6 +13,8 @@ This repository is maintained with the motivation of making SDK integration easi
   * [Max Ad Mediation](sdk_docs/max/README.md)
   * [InAppPurchase](sdk_docs/iap/README.md)
 * [Additional Features](#additional-features)
+  * [AB testing](sdk_docs/ab_test/README.md)
+  * [GDPR](sdk_docs/gdpr/README.md)
 * [Building For iOS](#building-for-ios)
 
 ## Getting Started
@@ -94,11 +96,11 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
   Quick Guide:
   * You will be prompted to add the Splash Scene provided with PotatoSDK. Using this ensures all the SDKs are ready for use when you get to your main game scene.
   * You can choose which scene is loaded next at Potato root object. (build index 1 is loaded by default)
-  * If you need to do any preload task for your game specific tasks on the splash screen you extend the provided splash scene by adding your scripts/gameobjects to it.
-  * If your extended tasks are asynchronous (won't be executed immediately and you need to wait indefinitely) and you need to halt the loading process of the next scene, you can enable manual loading in the root Potato script. In this case you will need to load the next scene when your work is complete. But please check if the Potato.isReady flag is true before loading the next scene.
-* AB testing 
+  * **If you need to do any preload task** for your game specific tasks on the splash screen you extend the provided splash scene by adding your scripts/gameobjects to it.
+  * **If your extended tasks are asynchronous** (won't be executed immediately and you need to wait indefinitely) and you need to halt the loading process of the next scene, you can enable manual loading in the root Potato script. In this case you will need to load the next scene when your work is complete. But please check if the `Potato.isReady` flag is true before loading the next scene.
+* [AB testing](sdk_docs/ab_test/README.md)
   * This module uses Max sdk’s variable services
-* GDPR 
+* [GDPR](sdk_docs/gdpr/README.md)
   * The result of the consent flow is communicated to Max and Adjust SDK
 * NoADs
   QuickGuide: 
@@ -120,10 +122,11 @@ This process is recommended since this can avoid some common issues in a more au
 
 #### First Time Build Specific:
 * Minimal mandatory MAX integration: You must have max sdk integrated (even if you are not using ads right now) fill up the details as follows:
-  ![alt text](image.jpg)
+  ![MAX sdk settings](readme_images/max_ready.png)
   * SDK Key : “Lzi5VR_J50y55PM5ctwAwALT5d9g1CKMhT1TF0naOa4fSUn98Vd6rXsvAp4I3A-5LaPvNk4RSvKe5fesxKhRzh”
   * Privacy URL : “https://lionstudios.cc/privacy/”
   * Terms URL : “https://lionstudios.cc/terms/”
   * Enable Facebook mediated network in max
+  ![FB ATT check](readme_images/max_ready_a.png)
   * Activate the potatoSDK MAX wrapper.  
 
