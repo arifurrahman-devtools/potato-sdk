@@ -1,6 +1,8 @@
 # PotatoSDK
 This repository is maintained with the motivation of making SDK integration easier or faster for the developers of Alpha Potato. Please follow the document and keep an eye out for changes when making a new integration. For any queries or feedbacks feel free to give me a knock!
-
+Quick Links
+* [Getting Started](#getting-started)
+* [SDK Walkthroughs](#ios-build-guidelines)
 ## Getting Started
 #### Environment Setup
 * Make sure you are using minimum recommended Unity version: 2021.1.16f1
@@ -102,7 +104,7 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
 
 
 
-### iOS Build Guidelines:
+# iOS Build Guidelines
 Additional steps while building for iOS are noted in this section. It's recommended that you stabilize your android build prior to moving to iOS.
 
 #### About the recommended iOS Build Process:
