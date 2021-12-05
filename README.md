@@ -68,12 +68,12 @@ Potato SDK does not contain a wrapper for Lion Analytics. If you need to use Lio
 ---
 ### SDK Walkthroughs
 Here are links to specific integration and testing walkthroughs. The SDKs in question are primarily documented for the android platform, additional steps for iOS are noted in the next section.
-* [Facebook](sdk_docs/facebook.md)
-* GameAnalytics(GA)
-* Adjust 
-* Firebase 
-* Max Ad Mediation
-* InAppPurchase
+* [Facebook](sdk_docs/facebook/README.md)
+* [GameAnalytics(GA)](sdk_docs/game_analytics/README.md)
+* [Adjust](sdk_docs/adjust/README.md)
+* [Firebase](sdk_docs/firebase/README.md)
+* [Max Ad Mediation](sdk_docs/max/README.md)
+* [InAppPurchase](sdk_docs/iap/README.md)
 
 ### Additional Feature Walkthroughs
 * Splash Screen 
