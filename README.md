@@ -1,8 +1,20 @@
 # PotatoSDK
 This repository is maintained with the motivation of making SDK integration easier or faster for the developers of Alpha Potato. Please follow the document and keep an eye out for changes when making a new integration. For any queries or feedbacks feel free to give me a knock!
-Quick Links
+
+### Quick Links:
 * [Getting Started](#getting-started)
-* [SDK Walkthroughs](#ios-build-guidelines)
+* [Building For Android](#building-for-android)
+* [About Analytics](#about-analytics)
+* [SDKs](#sdk-walkthroughs)
+  * [Facebook](sdk_docs/facebook/README.md)
+  * [GameAnalytics(GA)](sdk_docs/game_analytics/README.md)
+  * [Adjust](sdk_docs/adjust/README.md)
+  * [Firebase](sdk_docs/firebase/README.md)
+  * [Max Ad Mediation](sdk_docs/max/README.md)
+  * [InAppPurchase](sdk_docs/iap/README.md)
+* [Additional Features](#additional-features)
+* [Building For iOS](#building-for-ios)
+
 ## Getting Started
 #### Environment Setup
 * Make sure you are using minimum recommended Unity version: 2021.1.16f1
@@ -77,7 +89,7 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
 * [Max Ad Mediation](sdk_docs/max/README.md)
 * [InAppPurchase](sdk_docs/iap/README.md)
 
-### Additional Feature Walkthroughs
+### Additional Features
 * Splash Screen 
   Quick Guide:
   * You will be prompted to add the Splash Scene provided with PotatoSDK. Using this ensures all the SDKs are ready for use when you get to your main game scene.
@@ -100,11 +112,7 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
 
 
 ---
-
-
-
-
-# iOS Build Guidelines
+# Building For iOS
 Additional steps while building for iOS are noted in this section. It's recommended that you stabilize your android build prior to moving to iOS.
 
 #### About the recommended iOS Build Process:
