@@ -92,7 +92,8 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
 * [InAppPurchase](sdk_docs/iap/README.md)
 
 ### Additional Features
-* Splash Screen 
+* **Splash Screen** 
+  
   Quick Guide:
   * You will be prompted to add the Splash Scene provided with PotatoSDK. Using this ensures all the SDKs are ready for use when you get to your main game scene.
   * You can choose which scene is loaded next at Potato root object. (build index 1 is loaded by default)
@@ -102,14 +103,17 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
   * This module uses Max sdk’s variable services
 * [GDPR](sdk_docs/gdpr/README.md)
   * The result of the consent flow is communicated to Max and Adjust SDK
-* NoADs
+* **NoADs**
+  
   QuickGuide: 
-  * Needs InAppPurchases module and wrapper to be active
+  * This module needs InAppPurchases module and wrapper to be active
   * NoAd nonconsumable must be set up in the relevant stores and added in the InAppPurchase wrapper.
   * To use this module you need to
     * Activate the wrapper
     * In the wrapper select which InAppPurchase item is “NoAd”
-  * Expected behaviour: buying/restoring  noads instantly stops banner/interstitials
+  * Expected behaviour: buying/restoring  noads
+    *  would instantly stop banner if it was on display
+    *  prevents showing banners/interstitials from that point
 
 
 
@@ -170,6 +174,7 @@ Additional steps while building for iOS are noted in this section. It's recommen
   * Run terminal at the build folder and `pod install`.
   * Continue with your build according to the build guidelines.
 
+[Back To Top](#potatosdk)
 
 
 
