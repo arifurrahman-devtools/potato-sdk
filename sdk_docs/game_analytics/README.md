@@ -1,5 +1,5 @@
 [Go Back To Main Page](../../README.md)
-# GameAnalytics Integration:
+## GameAnalytics Integration:
 * Get the latest Game Analytics unity sdk from: [here](https://download.gameanalytics.com/unity/GA_SDK_UNITY.unitypackage). 
 * Import the SDK and Activate PotatoSDK Game AnalyticsWrapper
 * Goto `Window/GameAnalytics/Select Settings`
@@ -12,7 +12,7 @@
       ![GA setup](img_0.png) 
     * Alternatively you can enter the game key and secret key only provided by your PM
 
-# Testing GameAnalytics Integration:
+### Testing GameAnalytics Integration:
 * Enable Test Analytics in your GA wrapper of PotatoSDK
 * Build and run
 * Goto https://go.gameanalytics.com/home and login (same credentials)
