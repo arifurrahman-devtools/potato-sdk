@@ -118,16 +118,36 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
 Additional steps while building for iOS are noted in this section. It's recommended that you stabilize your android build prior to moving to iOS.
 
 #### About the recommended iOS Build Process:
-This process is recommended since this can avoid some common issues in a more automated process and also makes some issues more solvable. (for example “broken pod installation” avoiding, “FB Lexical Preprocessor” solve)
+*This process is recommended since this can avoid some common issues in a more automated process and also makes some issues more solvable. (for example “broken pod installation” avoiding, “FB Lexical Preprocessor” solve)*
 
-#### First Time Build Specific:
+### First Time Build Specific:
 * Minimal mandatory MAX integration: You must have max sdk integrated (even if you are not using ads right now) fill up the details as follows:
   
   ![MAX sdk settings](readme_images/max_ready.png)
-  * SDK Key : “Lzi5VR_J50y55PM5ctwAwALT5d9g1CKMhT1TF0naOa4fSUn98Vd6rXsvAp4I3A-5LaPvNk4RSvKe5fesxKhRzh”
+  * SDK Key : `Lzi5VR_J50y55PM5ctwAwALT5d9g1CKMhT1TF0naOa4fSUn98Vd6rXsvAp4I3A-5LaPvNk4RSvKe5fesxKhRzh`
   * Privacy URL : “https://lionstudios.cc/privacy/”
   * Terms URL : “https://lionstudios.cc/terms/”
   * Enable Facebook mediated network in max
-  ![FB ATT check](readme_images/max_ready_a.png)
+    ![FB ATT check](readme_images/max_ready_a.png)
   * Activate the potatoSDK MAX wrapper.  
+
+* “Play Service Resolver(PSR)/External Dependency Manager(EDM)”: (if your having errors after opening project for IOS check troubleshooting point 1)
+  * Do not run “install cocoapods” in EDM/PSR
+  * This is what the iOS Resolver settings should look like
+    
+    ![iOS POD setup](readme_images/pod.png)
+* If you are using firebase don't forget to drag and drop “GoogleService-Info.plist” file in your asset folder.
+* If you are using Game Analytics please click “Widnow/GameAnalytics/SelectSettings” and check if the iphone platform is already added or not.  If not add it by either getting keys from your PM or logging in to GA and selecting the right game.
+  
+  ![GA setup](readme_images/ga.png)
+
+### General Build Checklist
+1. Check if all the wrappers are properly configured (you have to enable them the first time you are using that specific wrapper on iOS)
+2. Choose `Build` instead  of “Build and Run”
+3. Recommended to build in a newly created folder. (Append might work, but more risky)
+4. Right click on the build folder and choose “New Terminal at Folder”.
+5. (Check troubleshooting #2 if you are using FB before you do this)Run command `pod install`. (will generate workspace file)
+6. Open workspace file and sign application and run it on device.
+
+
 
