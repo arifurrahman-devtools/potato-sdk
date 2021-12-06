@@ -136,7 +136,7 @@ Additional steps while building for iOS are noted in this section. It's recommen
   * This is what the iOS Resolver settings should look like
     
     ![iOS POD setup](readme_images/pod.png)
-* If you are using firebase don't forget to drag and drop “GoogleService-Info.plist” file in your asset folder.
+* If you are using firebase don't forget to drag and drop **“GoogleService-Info.plist”** file in your asset folder.
 * If you are using Game Analytics please click “Widnow/GameAnalytics/SelectSettings” and check if the iphone platform is already added or not.  If not add it by either getting keys from your PM or logging in to GA and selecting the right game.
   
   ![GA setup](readme_images/ga.png)
@@ -148,6 +148,29 @@ Additional steps while building for iOS are noted in this section. It's recommen
 4. Right click on the build folder and choose “New Terminal at Folder”.
 5. (Check troubleshooting #2 if you are using FB before you do this)Run command `pod install`. (will generate workspace file)
 6. Open workspace file and sign application and run it on device.
+
+### Common iOS Troubleshooting:
+#### 1. iOS Resolver Name Mismatch
+![iOS resolver name error](readme_images/rename_0.png)
+* The error shows a common issue in many Unity 2021.x.x versions. The solution is to rename all IOSResolver files
+  ![Rename Files](readme_images/rename_1.png)
+  * Google.IOSResolver`_v1.2.135.0`.dll => Google.IOSResolver.dll 
+  * Google.IOSResolver`_v1.2.135.0`.dll.meta => Google.IOSResolver.dll.meta
+  * Google.IOSResolver`_v1.2.135.0`.dll.mdb => Google.IOSResolver.dll.mdb
+  * Google.IOSResolver`_v1.2.135.0`.dll.mdb.meta => Google.IOSResolver.dll.mdb.meta
+* An alternate solution to the above is to completely replace current EDM or PSR with the latest version of EDM. You can get the latest version from this [link](https://github.com/googlesamples/unity-jar-resolver/blob/master/external-dependency-manager-latest.unitypackage)
+#### 2. Lexical or Preprocessor Issue (FB)
+![FB error](readme_images/fb_error.png)
+* If you have **Facebook SDK 11.0.0** you will see this error when you build from xcode.  	
+* To fix this follow these steps
+  * Open the build folder after building from unity
+  * Edit the **Podfile**, you will need to change the version of each facebook related pod version to `11.1.0` from 11.0.0.
+    ![FB fix](readme_images/fb_fix.png)
+  * Save the pod file
+  * Run terminal at the build folder and `pod install`.
+  * Continue with your build according to the build guidelines.
+
+
 
 
 
