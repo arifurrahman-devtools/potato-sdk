@@ -25,6 +25,7 @@ This repository is maintained with the motivation of making SDK integration easi
   * Version and bundle version code (both will change with submissions)
   * (Android) Scripting backend =  IL2CPP
   * (Android) target architectures = armv7 and arm64
+  * (Android) target API level = 30 (as of 06/12/21, get confirmation from your Product Manager)
   * (Android) Sign your application and create a signed build. 
   * (Android) If you have an android manifest you should change the debuggable attribute to false
 * While copying IDs or keys (e.g. ad unit ID, app token etc) make sure to check for white space characters on both end of the key
