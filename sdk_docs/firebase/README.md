@@ -1,7 +1,7 @@
 [Go Back To Main Page](../../README.md)
 ## Firebase Integration:
 * Get the latest FireBase unity sdk from: [here](https://developers.google.com/unity/archive#google_analytics_for_firebase) . [tried and tested version: **8.1.0, 8.3.0**] 
-* Import the SDK (Please check **Managing “External Dependency Manager(EDM)”/”Play Service Resolver(PSR)”** section for importing instruction)
+* Import the SDK (dont forget to uncheck **Play Services Resolver and/ External Dependency Manager** folder if you have the latest **External Dependency Manager**)
 * Recommended to choose “no” when prompted **“Enable Auto Resolution?"** (you can also do this anytime by going to Assets/ExternalDependencyManager/AndroidResolver/Settings)
 * Activate PotatoSDK Firebase Wrapper
 * Obtain “google-services.json” (for ios it’s “GoogleService-Info.plist”) file from your project manager for your specific app (or ask how to get it)
