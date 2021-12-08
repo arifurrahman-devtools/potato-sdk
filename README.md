@@ -23,6 +23,7 @@ This repository is maintained with the motivation of making SDK integration easi
 * Setup your project properly at the beginning (to avoid future complications)
   * packageName or bundleID.  
   * Version and bundle version code (both will change with submissions)
+  * Download and import the latest **[External Dependency Manager](https://github.com/googlesamples/unity-jar-resolver/raw/master/external-dependency-manager-latest.unitypackage)**
   * (Android) Scripting backend =  IL2CPP
   * (Android) target architectures = armv7 and arm64
   * (Android) target API level = 30 (as of 06/12/21, get confirmation from your Product Manager)
@@ -30,7 +31,6 @@ This repository is maintained with the motivation of making SDK integration easi
   * (Android) If you have an android manifest you should change the debuggable attribute to false
 * While copying IDs or keys (e.g. ad unit ID, app token etc) make sure to check for white space characters on both end of the key
 * You might want to add [logs-viewer](https://assetstore.unity.com/packages/tools/integration/log-viewer-12047) package for viewing logs on mobile devices
-
 
 #### Using PotatoSDK
 * Download the PotatoSDK. Check in the release section for latest package.
@@ -40,31 +40,31 @@ This repository is maintained with the motivation of making SDK integration easi
 * The activate button is platform dependent (if you  activate for android, you will still need to activate when you move to iOS).
 * Recommended to allow using the potatoSDK to add a loading scene when prompted.
 
-#### Managing “External Dependency Manager(EDM)”/”Play Service Resolver(PSR)” 
-* Always check when you import a new package, if it uses the External Dependency Manager or Play Service Resolver. 
-* And if it does, check if you already have one of them(and which version) in your projects.
-* You have to keep in mind that PSR is a lower version of EDM.
-* Check for the following situations.
-  * Your **project has Lower version** of EDM/PSR than the SDK:
-    * First, delete the EDM/PSR folder,
-    * Then import the new sdk
-  * Your **project has Higher version** of EDM than the SDK:**
-    * While importing the SDK, uncheck the EDM/PSR folder then import it.
+#### “External Dependency Manager(EDM)”/”Play Service Resolver(PSR)” 
+###### Management
+* If you are starting a new project according to the current guidelines (as of 08/12/2021) you should already have the latest version of the EDM in your project
+* If your project already has an older version:
+  * First, delete all current EDM or PSR folders,
+  * Download the latest version from the link and import it. [Latest Version Link](https://github.com/googlesamples/unity-jar-resolver/raw/master/external-dependency-manager-latest.unitypackage).
+* Always check when you import a new package, if it includes a version External Dependency Manager and/or Play Service Resolver. If it does, make sure you uncheck the whole folders
+
+###### Background
+External Dependency Manager helps you in managing platform specific libraries (android/iOS). Play Service Resolver is the previous name of External Dependency Manager. Many sdks (Facebook,Max, Firebase etc) comes with a version of EDM or PSR. We will maintain in our projects the latest version of External Dependency Manager. 
 
 ## Build Guidelines For Platforms
 The PotatoSDK is prepared with the assumption that the builds are usually stabilized in android before iOS. The following sections describes the recommended practice while building for android. The next section describes SDKs and feature specific workflows, followed by a section on iOS build practices.
 
 ## Building For Android
 ### Situations to Delete and Resolve Libraries
-When working on andorid and if your project contains either of EDM/PSR, check for the following situations:
+When working on android check for the following situations:
 * Any new sdk package imported or upgraded (if you are confident that the package does not contain native android code, you can skip this)
 * Change to bundle id
 * Change to gradle/android manifest (usually due to new package import or update)
 * Working on a new computer
 
 If any of the situations arise please make sure you do the following:
-* Assets/External Dependency Manager or Play Service Resolver/Android Resolver/ Delete Resolved Libraries
-* Assets/External Dependency Manager or Play Service Resolver/Android Resolver/ Resolve
+* Assets/External Dependency Manager/Android Resolver/ Delete Resolved Libraries
+* Assets/External Dependency Manager/Android Resolver/ Resolve
 
 ### Before Build Submission
 * Your android manifest must have the following attribute inside its application element. `android:debuggable="false"`
