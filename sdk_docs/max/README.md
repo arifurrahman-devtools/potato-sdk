@@ -1,7 +1,7 @@
 [Go Back To Main Page](../../README.md)
 ## MAX Integration:
 * Get the latest MAX unity sdk from: [here](https://dash.applovin.com/documentation/mediation/unity/getting-started/integration).  You will need to get Applovin credentials for this from your PM. Will also require an OTP.
-* Import the SDK (Please check **Managing “External Dependency Manager(EDM)”/”Play Service Resolver(PSR)”** section for importing instruction)
+* Import the SDK (dont forget to uncheck **Play Services Resolver and/ External Dependency Manager** folder if you have the latest **External Dependency Manager**)
 * Make sure ExternalDependencyManager/AndroidResolver/Settings has **"use jetifier"** enabled also recommended disable **“Auto Resolution “**
 * Open Applovin/IntegrationManager
     * enable Max ad review and enter the sdk key: 
