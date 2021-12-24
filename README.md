@@ -24,6 +24,7 @@ This repository is maintained with the motivation of making SDK integration easi
   * packageName or bundleID.  
   * Version and bundle version code (both will change with submissions)
   * Download and import the latest **[External Dependency Manager](https://github.com/googlesamples/unity-jar-resolver/raw/master/external-dependency-manager-latest.unitypackage)**
+  * Game orientation is in portrait (or whichever is applicable for your game)
   * (Android) Scripting backend =  IL2CPP
   * (Android) target architectures = armv7 and arm64
   * (Android) target API level = 30 (as of 06/12/21, get confirmation from your Product Manager)
