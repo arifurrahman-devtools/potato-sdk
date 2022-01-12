@@ -98,9 +98,16 @@ Here are links to specific integration and testing walkthroughs. The SDKs in que
   
   Quick Guide:
   * You will be prompted to add the Splash Scene provided with PotatoSDK. Using this ensures all the SDKs are ready for use when you get to your main game scene.
-  * You can choose which scene is loaded next at Potato root object. (build index 1 is loaded by default)
-  * **If you need to do any preload task** for your game specific tasks on the splash screen you extend the provided splash scene by adding your scripts/gameobjects to it.
-  * **If your extended tasks are asynchronous** (won't be executed immediately and you need to wait indefinitely) and you need to halt the loading process of the next scene, you can enable manual loading in the root Potato script. In this case you will need to load the next scene when your work is complete. But please check if the `Potato.isReady` flag is true before loading the next scene.
+  * You can choose which scene is loaded next at Potato root object by changing "Auto Load Scene Index". (build index 1 is loaded by default)
+  
+  ![splash screen control](readme_images/splash_screen_0.png)
+  * If you want to manage loading next scene from the splash screen by yourself
+    1. You must make sure that `Potato.isReady` flag returns true before leaving the splash screen.
+    2. You should enable the option "Skip Auto Load Next Scene" (this tells potatoSDK that you will manage your own loading and it shouldnt load a default scene)
+  * **If you are using LionAnalytics**: please make sure not to make any lion analytics call before `Potato.isReady`
+  * If you need, you can make use of the splash screen to initiate or preload gameplay assets(or similar tasks).
+    * For basic tasks (e.g creating Pools) you can just add gameobjects/prefabs to the scene
+    * For tasks that require more than one frame, you should "Skip Auto Load Next Scene" and then only load the next scene when `Potato.isReady` and your task is complete. 
 * [AB testing](sdk_docs/ab_test/README.md)
   * This module uses Max sdk’s variable services
 * [GDPR](sdk_docs/gdpr/README.md)
