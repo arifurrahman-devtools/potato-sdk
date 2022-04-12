@@ -63,7 +63,10 @@ namespace PotatoSDK
 
             MaxSdk.ShowRewardedAd(adUnitId);
         }
-
+        public bool IsReady()
+        {
+            return MaxSdk.IsRewardedAdReady(adUnitId);
+        }
 
         int retryAttempt;
         private void LoadRewardedAd()

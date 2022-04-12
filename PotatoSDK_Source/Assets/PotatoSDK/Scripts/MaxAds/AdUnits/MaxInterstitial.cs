@@ -38,6 +38,12 @@ namespace PotatoSDK
 
             if (MaxSdk.IsInterstitialReady(adUnitId)) MaxSdk.ShowInterstitial(adUnitId);
         }
+
+        public bool IsReady()
+        {
+            return MaxSdk.IsInterstitialReady(adUnitId);
+        }
+
         private void LoadInterstitial()
         {
             MaxSdk.LoadInterstitial(adUnitId);
