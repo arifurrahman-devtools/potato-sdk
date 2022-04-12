@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+
 
 namespace PotatoSDK
 {
@@ -48,28 +46,4 @@ namespace PotatoSDK
         }
 
     }
-#if UNITY_EDITOR
-    [CustomEditor(typeof(QuickLinkButton))]
-    public class QuickLinkButton_Editor : Editor
-    {
-        public string temp_link;
-        public override void OnInspectorGUI()
-        {
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.PropertyField (serializedObject.FindProperty("link"));
-            EditorGUI.EndDisabledGroup();
-            temp_link = EditorGUILayout.TextField(new GUIContent("New Link"), temp_link);
-            if (!string.IsNullOrEmpty(temp_link))
-            {
-                if (GUILayout.Button("Set New Link"))
-                {
-                    (target as QuickLinkButton).SetLink(temp_link);
-                    temp_link = "";
-                }
-            }
-
-        }
-    }
-#endif
-
 }
