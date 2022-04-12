@@ -117,7 +117,7 @@ namespace PotatoSDK
         }
         GACore()
         {
-            if (Application.platform == RuntimePlatform.IPhonePlayer)
+            if (Application.platform == RuntimePlatform.IPhonePlayer && Potato.ios14_5plusDetected)
             {
                 GameAnalytics.RequestTrackingAuthorization(this);
             }
