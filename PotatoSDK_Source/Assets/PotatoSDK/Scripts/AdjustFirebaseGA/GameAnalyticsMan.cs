@@ -9,6 +9,9 @@ namespace PotatoSDK
 {
     public class GameAnalyticsMan : MonoBehaviour, IPotatoInitiatable
     {
+        public static GameAnalyticsMan Instance { get; private set; }
+        public static event System.Action onAnalyticsReady;
+
         bool enableModuleLogs = true;
         public string LogColorCode => "8CD14F";
         public bool IsReady { get; set; }
@@ -30,7 +33,7 @@ namespace PotatoSDK
 
         void IPotatoInitiatable.InitializeSuperEarly(bool hasConsent, System.Action<IPotatoInitiatable> onModuleReadyToUse)
         {
-
+            Instance = this;
             Instantiate(prefabReference);
 
             Centralizer.Add_DelayedAct(() => {
@@ -40,6 +43,7 @@ namespace PotatoSDK
                 {
                     onModuleReadyToUse?.Invoke(this);
                     IsReady = true;
+                    onAnalyticsReady?.Invoke();
                 });
             }, 0.1f);
 

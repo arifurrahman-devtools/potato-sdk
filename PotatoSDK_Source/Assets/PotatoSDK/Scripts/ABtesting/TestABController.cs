@@ -19,8 +19,13 @@ namespace PotatoSDK
 
             root.SetActive(true);
 
-            foreach (var item in keeps)
+            foreach (ABKeep item in keeps)
             {
+#if UNITY_IOS
+                if (item.disable_iOS) continue;
+#elif UNITY_ANDROID
+                if (item.disable_Android) continue;
+#endif
                 GameObject modG = Instantiate(modulePrefab);
                 modG.transform.SetParent(spawnRoot);
                 modG.transform.localScale = Vector3.one;

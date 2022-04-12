@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace PotatoSDK
 {
     public class ABMan : MonoBehaviour, IPotatoInitiatable
@@ -17,7 +16,7 @@ namespace PotatoSDK
 
 
 
-        private static ABMan Instance;
+        public static ABMan Instance { get; private set; }
         private Dictionary<ABtype, HardAB> _allSettings;
         public Dictionary<ABtype, HardAB> allSettings
         {
@@ -48,7 +47,10 @@ namespace PotatoSDK
                 {
                     entry.hardAB = hardAB;
                     allSettings.Add(entry.ab_type, hardAB);
-                    hardAB.Assign_IfUnassigned(MaxSdk.VariableService.GetString(hardAB.GetKey()));
+                    hardAB.Assign_IfUnassigned(MaxSdk.VariableService.GetString(hardAB.GetKey()), (ABtype type, int v) => 
+                    {
+                        if(!enableABTestPanel && customDefinitionSetup.type == type) customDefinitionSetup.CheckCustomDimensions(v);
+                    });
                 }
             }
 #endif
@@ -60,9 +62,9 @@ namespace PotatoSDK
             return Instance.allSettings[type];
         }
         public GameObject prefabReference;
-        public bool enableABTestPanel;
+        public bool enableABTestPanel = false;//=> BuildSpecManager.enableABTestUI;
         public List<ABKeep> AB_entries;
-
+        public CustomDefSetup customDefinitionSetup;
         void IPotatoInitiatable.InitializeSuperEarly(bool hasConsent, System.Action<IPotatoInitiatable> onModuleReadyToUse)
         {
 #if POTATO_AB_TEST && POTATO_MAX
@@ -131,6 +133,9 @@ namespace PotatoSDK
         public List<ABDisplayDefinitions> displayDefinitions;
 
         [System.NonSerialized] public HardAB hardAB;
+
+
+        
     }
 
     [System.Serializable]
@@ -139,5 +144,66 @@ namespace PotatoSDK
         public string value;
         public string significance;
     }
+    [System.Serializable]
+    public class CustomDefinitionPairs
+    {
+        public int value;
+        public string customDefinition;
+    }
+    [System.Serializable]
+    public class CustomDefSetup
+    {
+        public ABtype type;
+        public List<CustomDefinitionPairs> definitions;
 
+        static HardData<bool> reportedCustomDimensions;
+        public void CheckCustomDimensions(int value)
+        {
+            if (definitions.Count == 0) return;
+            if (reportedCustomDimensions == null)
+            {
+                reportedCustomDimensions = new HardData<bool>("CUSTOM_DIM_SET",false);
+            }
+
+#if POTATO_GAME_ANALYTICS
+            if (reportedCustomDimensions)
+            {
+                return;
+            }
+
+            string dim_string = "";
+
+            for (int i = 0; i < definitions.Count; i++)
+            {
+                if (definitions[i].value == value)
+                {
+                    dim_string = definitions[i].customDefinition;
+                    break;
+                }
+            }
+            //$"found dim string: {dim_string}".Log("FFFF00");
+
+            if (string.IsNullOrEmpty(dim_string))
+            {
+                Debug.LogError("custom dimension setup is faulty");
+                return;
+            }
+            if (GameAnalyticsMan.Instance && GameAnalyticsMan.Instance.IsReady)
+            {
+                GameAnalyticsSDK.GameAnalytics.SetCustomDimension01(dim_string);
+                $"Custom Dimension: {dim_string}".Log("FF9900");
+                reportedCustomDimensions.value = true;
+            }
+            else
+            {
+                GameAnalyticsMan.onAnalyticsReady += () =>
+                {
+                    GameAnalyticsSDK.GameAnalytics.SetCustomDimension01(dim_string);
+                    $"Custom Dimension: {dim_string}".Log("FF9900");
+                    reportedCustomDimensions.value = true;
+                };
+            }
+#endif
+        }
+    }
 }

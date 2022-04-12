@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameAnalyticsSDK;
+//using FRIA;
 
 namespace PotatoSDK
 {
@@ -37,7 +39,7 @@ namespace PotatoSDK
         {
             return key;
         }
-        public void Assign_IfUnassigned(string abStringValue)
+        public void Assign_IfUnassigned(string abStringValue, System.Action<ABtype,int> onFreshValuesSet)
         {
 
             if (data.value == "" || isVolatile)
@@ -45,6 +47,77 @@ namespace PotatoSDK
 
                 Log(LogLevel.Important, string.Format("[AB test] {0} key value set: {1} from {2}", key, abStringValue, data.value));
                 data.value = abStringValue;
+                int v;
+                GetValue(out v);
+                //FRIA.Centralizer.Init();
+                onFreshValuesSet?.Invoke(type,v);
+               
+                
+                
+                //FRIA.Centralizer.Add_DelayedMonoAct(Centralizer.Instance, () => {
+                //    //if (type == ABtype.AB0_rpi_test)
+                //    //{
+                //    //    int v;
+                //    //    GetValue(out v);
+                //    //    switch (v)
+                //    //    {
+                //    //        case 0:
+                //    //            GameAnalytics.SetCustomDimension01("fullRV_inter_Energy");
+                //    //            break;
+                //    //        case 1:
+                //    //            GameAnalytics.SetCustomDimension01("fullRV_inter_noEnergy");
+                //    //            break;
+                //    //        case 2:
+                //    //            GameAnalytics.SetCustomDimension01("fullRV_noInter_Energy");
+                //    //            break;
+                //    //    }
+                //    //}
+                //    //if (type == ABtype.AB1_rpi_test2)
+                //    //{
+                //    //    int v;
+                //    //    GetValue(out v);
+                //    //    switch (v)
+                //    //    {
+                //    //        case 0:
+                //    //            GameAnalytics.SetCustomDimension01("fullRV_inter_Energy");
+                //    //            break;
+                //    //        case 1:
+                //    //            GameAnalytics.SetCustomDimension01("fullRV_inter_noEnergy");
+                //    //            break;
+                //    //    }
+                //    //}
+                //    //if (type == ABtype.AB2_simpleUI_inter_test)
+                //    //{
+                //    //    int v;
+                //    //    GetValue(out v);
+                //    //    switch (v)
+                //    //    {
+                //    //        case 0:
+                //    //            GameAnalytics.SetCustomDimension01("simple_no_inter");
+                //    //            break;
+                //    //        case 1:
+                //    //            GameAnalytics.SetCustomDimension01("simple_inter");
+                //    //            break;
+                //    //    }
+                //    //}
+                //    if (type == ABtype.AB3_level_fixes)
+                //    {
+                //        int v;
+                //        GetValue(out v);
+                //        switch (v)
+                //        {
+                //            case 0:
+                //                GameAnalytics.SetCustomDimension01("original_levels");
+                //                "original_levels".Debug("FF9900");
+                //                break;
+                //            case 1:
+                //                GameAnalytics.SetCustomDimension01("fixed_levels");
+                //                "fixed_levels".Debug("FF9900");
+                //                break;
+                //        }
+                //    }
+                //}, 5);
+                
             }
             else
             {

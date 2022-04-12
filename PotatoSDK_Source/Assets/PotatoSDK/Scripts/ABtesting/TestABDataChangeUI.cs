@@ -82,6 +82,12 @@ namespace PotatoSDK
             if (selectionIndex >= 0)
             {
                 ab.ForceSetValue(keep.displayDefinitions[selectionIndex].value);
+                if (keep.ab_type == ABMan.Instance.customDefinitionSetup.type)
+                {
+                    int value = 0;
+                    keep.hardAB.GetValue(out value);
+                    ABMan.Instance.customDefinitionSetup.CheckCustomDimensions(value);
+                }
             }
         }
     }
