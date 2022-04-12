@@ -102,7 +102,7 @@ namespace PotatoSDK
 
         private void TestRV()
         {
-            ShowRV((bool success) =>
+            ShowRV(RVPlacement.test,(bool success) =>
             {
                 if((int)ActiveLogLevel >= (int)LogLevel.Important) string.Format("RV completed with success result: {0}",success).Log(LogColorCode);
             });
@@ -115,11 +115,11 @@ namespace PotatoSDK
             }
             else Debug.LogError("interstitial AD not setup!");
         }
-        public static void ShowRV(Action<bool> onComplete)
+        public static void ShowRV(RVPlacement placement, Action<bool> onComplete)
         {
             if (rewarded != null)
             {
-                rewarded.ShowAd(onComplete);
+                rewarded.ShowAd(placement.ToString(), onComplete);
             }
             else
             {
@@ -147,5 +147,15 @@ namespace PotatoSDK
 
 
 #endif
+    }
+
+    public enum RVPlacement
+    {
+        test =-1,
+        bonus_level=1,
+        coin_multiplier=2,
+        energy_refill=3,
+        room_customization=10,
+        skin_customization=11,
     }
 }

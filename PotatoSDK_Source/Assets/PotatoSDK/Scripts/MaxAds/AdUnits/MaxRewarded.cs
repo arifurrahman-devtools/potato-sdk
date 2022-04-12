@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+#if POTATO_LION_ANALYTICS
+using LionStudios.Suite.Analytics;
+#endif
 
 namespace PotatoSDK
 {
 #if POTATO_MAX
     public class MaxRewarded
     {
+        const string LOG_ANALYTIC_COLOR = "00FF00";
         bool log;
         public Action seenRVSuccessfully;
         public MaxRewarded(string adUnitId, Action seenRVSuccessfully = null, bool log = false)
@@ -32,7 +36,10 @@ namespace PotatoSDK
             requestedActionOnComplete?.Invoke(success);
             requestPending = false;
         }
-        public void ShowAd(Action<bool> onComplete)
+
+        string placement = "";
+        const string COMMON_PLACEMENT = "default";
+        public void ShowAd(string placement,Action<bool> onComplete)
         {
             if (requestPending)
             {
@@ -40,12 +47,17 @@ namespace PotatoSDK
                 onComplete?.Invoke(false);
                 return;
             }
+            $"RV Show - {placement}".Log(LOG_ANALYTIC_COLOR);
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoShow(placement: placement, network: "unknown", level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
             if (!MaxSdk.IsRewardedAdReady(adUnitId))
             {
                 if (log) Debug.Log("<color=#ff00ff>Ad not ready...</color>");
                 onComplete?.Invoke(false);
                 return;
             }
+            this.placement = placement;
             requestedActionOnComplete = onComplete;
             requestPending = true;
 
@@ -79,11 +91,14 @@ namespace PotatoSDK
 
         private void OnRewardedAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
         {
-            if (log) Debug.LogFormat("AD loaded");
             // Rewarded ad is ready for you to show. MaxSdk.IsRewardedAdReady(adUnitId) now returns 'true'.
 
             // Reset retry attempt
             retryAttempt = 0;
+            $"RV loaded".Log(LOG_ANALYTIC_COLOR);
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoLoad(placement: COMMON_PLACEMENT, network: adInfo.NetworkName,level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
         }
 
         private void OnRewardedAdLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
@@ -96,10 +111,23 @@ namespace PotatoSDK
             double retryDelay = Math.Pow(2, Math.Min(6, retryAttempt));//0,1,2,4,8,16,32,64,64,64
 
             Centralizer.Add_DelayedAct(LoadRewardedAd, (float)retryDelay);
+
             //mono.Invoke("LoadRewardedAd", (float)retryDelay);
+            $"RV load failed".Log("FF00FF");
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoLoadFail(level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
         }
 
-        private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+        private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        {
+
+
+            $"RV start - {placement}".Log(LOG_ANALYTIC_COLOR);
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoStart(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
+        }
 
         private void OnRewardedAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
         {
@@ -108,9 +136,13 @@ namespace PotatoSDK
 
             if (log) Debug.Log("<color=#ff00ff>Ad failed to display...</color>");
             if (requestPending) OnRequestComplete(false);
+
+            $"RV Show failed - {placement}".Log("FF00FF");
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoShowFail(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
         }
 
-        private void OnRewardedAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
 
         private void OnRewardedAdHiddenEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
         {
@@ -119,6 +151,19 @@ namespace PotatoSDK
             if (log) Debug.Log("<color=#ff00ff>Ad closed by user...</color>");
 
             if (requestPending) OnRequestComplete(false);
+
+            $"RV hidden/end- {placement}".Log(LOG_ANALYTIC_COLOR);
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoEnd(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
+        }
+
+        private void OnRewardedAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        {
+            $"RV clicked- {placement}".Log(LOG_ANALYTIC_COLOR);
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoClick(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
         }
 
         private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
@@ -126,6 +171,11 @@ namespace PotatoSDK
             // The rewarded ad displayed and the user should receive the reward.
             if (log) Debug.Log("<color=#ff55ff>Ad successful...</color>");
             if (requestPending) OnRequestComplete(true);
+
+            $"RV collected- {placement}".Log(LOG_ANALYTIC_COLOR);
+#if POTATO_LION_ANALYTICS
+            LionAnalytics.RewardVideoCollect(placement: placement, level: LionAnalyticsMan.SelectedLevelNumber);
+#endif
         }
 
         private void OnRewardedAdRevenuePaidEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
@@ -135,4 +185,4 @@ namespace PotatoSDK
 
     }
 #endif
-}
+        }
