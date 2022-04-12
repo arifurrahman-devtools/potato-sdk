@@ -1,1 +1,8 @@
 PotatoSDK_Source/battle_ballet.keystore
+PotatoSDK_Source/Library/
+PotatoSDK_Source/Temp/
+PotatoSDK_Source/obj/
+PotatoSDK_Source/Logs/
+*.sln
+*.csproj
+PotatoSDK_Source/.vs/
