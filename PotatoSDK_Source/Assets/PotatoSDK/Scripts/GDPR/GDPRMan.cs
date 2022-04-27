@@ -24,7 +24,7 @@ namespace PotatoSDK
         static Action<IPotatoInitiatable> ReportModuleIsReady;
 
         public GameObject gdprPrefab;
-        bool waitForGDPRFlow = false;
+        public bool waitForGDPRFlow = false;
         [Space]
         [Space]
         public bool enforceConsentFlow = false;

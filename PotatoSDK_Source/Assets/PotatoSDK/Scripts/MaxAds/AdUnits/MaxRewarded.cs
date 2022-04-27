@@ -72,7 +72,7 @@ namespace PotatoSDK
             requestedActionOnComplete = onComplete;
             requestPending = true;
 
-            MaxSdk.ShowRewardedAd(adUnitId);
+            MaxSdk.ShowRewardedAd(adUnitId,placement:placement);
         }
         public bool IsReady()
         {

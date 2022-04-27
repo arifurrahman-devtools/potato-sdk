@@ -10,6 +10,7 @@ namespace PotatoSDK
 {
     public class FireBaseMan : MonoBehaviour,IPotatoInitiatable
     {
+        public static FireBaseMan Instance { get; private set; }
         bool enableModuleLogs = true;
         public string LogColorCode => "f5820d";
         public bool IsReady { get; set; }
@@ -28,6 +29,7 @@ namespace PotatoSDK
 
         void IPotatoInitiatable.InitializeSuperEarly(bool hasConsent, System.Action<IPotatoInitiatable> onModuleReadyToUse)
         {
+            Instance = this;
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
                 var dependencyStatus = task.Result;
                 if (dependencyStatus == DependencyStatus.Available)
