@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using System.IO;
 namespace PotatoSDK
 {
     public class SymbolControlledModuleEditor : Editor
@@ -23,15 +24,15 @@ namespace PotatoSDK
 
     public static class SDKEditorUtilityMan
     {
-        [MenuItem("PotatoSDK/Find Config Prefab",priority =1)]
-        public static void SelectThePotato()
-        {
-            Object target = Resources.Load("PotatoSDK");// AssetDatabase.LoadMainAssetAtPath("PotatoSDK/Resources/PotatoSDK.prefab");
-            Debug.Log(target.name);
-            Selection.activeObject = target;
-            EditorGUIUtility.PingObject(Selection.activeObject);
-        }
-        [MenuItem("PotatoSDK/Open Config Prefab", priority = 2)]
+        //[MenuItem("Potato/Find Config Prefab",priority =1)]
+        //public static void SelectThePotato()
+        //{
+        //    Object target = Resources.Load("PotatoSDK");// AssetDatabase.LoadMainAssetAtPath("PotatoSDK/Resources/PotatoSDK.prefab");
+        //    Debug.Log(target.name);
+        //    Selection.activeObject = target;
+        //    EditorGUIUtility.PingObject(Selection.activeObject);
+        //}
+        [MenuItem("Potato/Open SDK Config Prefab", priority = 10)]
         public static void OpenThePotato()
         {
             Object target = Resources.Load("PotatoSDK");// AssetDatabase.LoadMainAssetAtPath("PotatoSDK/Resources/PotatoSDK.prefab");
@@ -40,6 +41,27 @@ namespace PotatoSDK
             EditorGUIUtility.PingObject(Selection.activeObject);
             AssetDatabase.OpenAsset(Selection.activeInstanceID);
         }
+        [MenuItem("Potato/Load Splash Scene", priority = 20)]
+        public static void OpenTheScene()
+        {
+            Object target = Resources.Load("SplashScreen");// AssetDatabase.LoadMainAssetAtPath("PotatoSDK/Resources/PotatoSDK.prefab");
+            Debug.Log(target.name);
+            Selection.activeObject = target;
+            EditorGUIUtility.PingObject(Selection.activeObject);
+            AssetDatabase.OpenAsset(Selection.activeInstanceID);
+        }
+        [MenuItem("Potato/Generate Conflict",priority = 30)]
+        public static void GenerateConflict()
+        {
+            string path = "ConflictForGreaterGood.txt";
+
+            string data = string.Format("GitConflictGeneration: {0}\n{1} - Device Name: {2}\n{3}\n{4}", System.DateTime.Now, System.DateTime.Now.Ticks, SystemInfo.deviceName, SystemInfo.deviceModel, SystemInfo.deviceUniqueIdentifier);
+            StreamWriter sw = File.CreateText(path);
+            sw.WriteLine(data);
+            sw.Close();
+            Debug.LogErrorFormat(data);
+        }
+
         //[MenuItem("PotatoSDK/Select/Facebook Wrapper", priority = 10)]
         //public static void SelectFB()
         //{
