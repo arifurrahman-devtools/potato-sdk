@@ -8,9 +8,20 @@ using LionStudios.Suite.Analytics;
 
 namespace PotatoSDK
 {
-#if POTATO_MAX
+
     public class MaxRewarded
     {
+#if !POTATO_MAX
+        public void ShowAd(string placement, Action<bool> onComplete)
+        {
+            Debug.LogError("MAXMan is not actiavetd - PotatoSDK");
+        }
+        public bool IsReady()
+        {
+            Debug.LogError("MAXMan is not actiavetd - PotatoSDK");
+            return false;
+        }
+#else
         const string LOG_ANALYTIC_COLOR = "00FF00";
         bool log;
         public Action seenRVSuccessfully;
@@ -185,7 +196,7 @@ namespace PotatoSDK
         {
             // Ad revenue paid. Use this callback to track user revenue.
         }
-
-    }
 #endif
-        }
+    }
+
+}

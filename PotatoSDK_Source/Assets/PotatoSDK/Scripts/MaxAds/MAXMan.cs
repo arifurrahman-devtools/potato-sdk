@@ -31,6 +31,56 @@ namespace PotatoSDK
         {
             ActiveLogLevel = LogLevel.None;
         }
+        public static MaxInterstitial interstitial;
+        public static MaxRewarded rewarded;
+        public static MaxBanner banner;
+
+        private void TestRV()
+        {
+            ShowRV(RVPlacement.test, (bool success) =>
+            {
+                if ((int)ActiveLogLevel >= (int)LogLevel.Important) string.Format("RV completed with success result: {0}", success).Log(LogColorCode);
+            });
+        }
+        public static void ShowInterstitial()
+        {
+            if (interstitial != null)
+            {
+                interstitial.ShowAd();
+            }
+            else Debug.LogError("interstitial AD not setup!");
+        }
+        public static void ShowRV(RVPlacement placement, Action<bool> onComplete)
+        {
+            if (rewarded != null)
+            {
+                rewarded.ShowAd(placement.ToString(), onComplete);
+            }
+            else
+            {
+                Debug.LogError("rewarded AD not setup!");
+                onComplete?.Invoke(false);
+            }
+        }
+        public static void ShowBanner()
+        {
+            if (banner != null)
+            {
+                banner.SetActive(true);
+            }
+            else Debug.LogError("banner AD not setup!");
+        }
+
+        public static void HideBanner()
+        {
+            if (banner != null)
+            {
+                banner.SetActive(false);
+            }
+            else Debug.LogError("banner AD not setup!");
+        }
+
+
 
 #if !POTATO_MAX
         void IPotatoInitiatable.InitializeSuperEarly(bool hasConsent, System.Action<IPotatoInitiatable> onModuleReadyToUse)
@@ -68,9 +118,6 @@ namespace PotatoSDK
             IsReady = true;
         }
 
-        public static MaxInterstitial interstitial;
-        public static MaxRewarded rewarded;
-        public static MaxBanner banner;
 
         #region interstitial skipping       
 
@@ -100,50 +147,7 @@ namespace PotatoSDK
         }
         #endregion
 
-        private void TestRV()
-        {
-            ShowRV(RVPlacement.test,(bool success) =>
-            {
-                if((int)ActiveLogLevel >= (int)LogLevel.Important) string.Format("RV completed with success result: {0}",success).Log(LogColorCode);
-            });
-        }
-        public static void ShowInterstitial()
-        {
-            if (interstitial!=null)
-            {
-                interstitial.ShowAd();
-            }
-            else Debug.LogError("interstitial AD not setup!");
-        }
-        public static void ShowRV(RVPlacement placement, Action<bool> onComplete)
-        {
-            if (rewarded != null)
-            {
-                rewarded.ShowAd(placement.ToString(), onComplete);
-            }
-            else
-            {
-                Debug.LogError("rewarded AD not setup!");
-                onComplete?.Invoke(false);
-            }
-        }
-        public static void ShowBanner()
-        {
-            if (banner != null)
-            {
-                banner.SetActive(true);
-            }
-            else Debug.LogError("banner AD not setup!");
-        }
-    
-        public static void HideBanner()
-        {
-            if (banner != null)
-            {
-                banner.SetActive(false);
-            }
-            else Debug.LogError("banner AD not setup!");
-        }
+        
 
 
 #endif

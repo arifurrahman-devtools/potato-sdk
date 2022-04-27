@@ -4,9 +4,15 @@ using UnityEngine;
 
 namespace PotatoSDK
 {
-#if POTATO_MAX
     public class MaxBanner
     {
+#if !POTATO_MAX
+        public void SetActive(bool enable)
+        {
+
+            Debug.LogError("MAXMan is not actiavetd - PotatoSDK");
+        }
+#else
         bool log;
         Color bgColor;
         bool enabledSetByDeveloper = false;
@@ -93,8 +99,8 @@ namespace PotatoSDK
         string adUnitId = "YOUR_AD_UNIT_ID";
 
 
-
-    }
+        
 #endif
+    }
 
 }

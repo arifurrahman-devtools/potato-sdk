@@ -5,9 +5,19 @@ using System;
 
 namespace PotatoSDK
 {
-#if POTATO_MAX
     public class MaxInterstitial
     {
+#if !POTATO_MAX
+        public void ShowAd()
+        {
+            Debug.LogError("MAXMan is not actiavetd - PotatoSDK");
+        }
+        public bool IsReady()
+        {
+            Debug.LogError("MAXMan is not actiavetd - PotatoSDK");
+            return false;
+        }
+#else
         public Action onShowComplete;
         public MaxInterstitial(string adUnitId, Action onShowComplete=null)
         {
@@ -98,6 +108,6 @@ namespace PotatoSDK
             LoadInterstitial();
             onShowComplete?.Invoke();
         }
-    }
 #endif
+    }
 }
