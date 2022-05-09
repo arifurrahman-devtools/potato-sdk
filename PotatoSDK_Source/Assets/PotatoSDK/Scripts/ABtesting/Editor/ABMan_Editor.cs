@@ -20,6 +20,16 @@ namespace PotatoSDK
 
             EditorGUI.BeginChangeCheck();
             base.OnCoreModuleGUI();
+
+            foreach (CustomDefinitionPairs definition in abman.customDefinitionSetup.definitions)
+            {
+                string temp = ValidateCustomDimensionEditor(definition.customDefinition);
+                definition.customDefinition = temp;
+            }
+
+
+
+
             if (EditorGUI.EndChangeCheck())
             {
                 wasDirty = true;
@@ -32,6 +42,19 @@ namespace PotatoSDK
                 {
                     RefreshEnum();
                 }
+#if POTATO_GAME_ANALYTICS
+                GameAnalyticsSDK.Setup.Settings settings = Resources.Load<GameAnalyticsSDK.Setup.Settings>("GameAnalytics/Settings");
+                settings.CustomDimensions01.Clear();
+
+
+                foreach (CustomDefinitionPairs definition in abman.customDefinitionSetup.definitions)
+                {
+                    string temp = ValidateCustomDimensionEditor(definition.customDefinition);
+                    definition.customDefinition = temp;
+                    settings.CustomDimensions01.Add(definition.customDefinition);
+                }
+                SDKEditorUtilityMan.SetObjectDirty(settings);
+#endif
             }
 
 #endif
@@ -45,8 +68,49 @@ namespace PotatoSDK
 
             return "POTATO_AB_TEST";
         }
+#if POTATO_GAME_ANALYTICS
 
+        public static bool StringMatch(string s, string pattern)
+        {
+            if (s == null || pattern == null)
+            {
+                return false;
+            }
 
+            return System.Text.RegularExpressions.Regex.IsMatch(s, pattern);
+        }
+        private string ValidateCustomDimensionEditor(string customDimension)
+        {
+            if (customDimension.Length > 32)
+            {
+                Debug.LogError("Validation fail - custom dimension cannot be longer than 32 chars.");
+                return "too_long";
+            }
+            if (!StringMatch(customDimension, "^[A-Za-z0-9\\s\\-_\\.\\(\\)\\!\\?]{1,32}$"))
+            {
+                if (customDimension != null)
+                {
+                    Debug.LogError("Validation fail - custom dimension: Cannot contain other characters than A-z, 0-9, -_., ()!?. String: '" + customDimension + "'");
+                }
+                return "invalid_string";
+            }
+            if (ConsistsOfWhiteSpace(customDimension))
+            {
+                return "remove_white_space";
+            }
+            return customDimension;
+        }
+
+        private bool ConsistsOfWhiteSpace(string s)
+        {
+            foreach (char c in s)
+            {
+                if (c != ' ')
+                    return false;
+            }
+            return true;
+        }
+#endif
 
         public void RefreshEnum()
         {
