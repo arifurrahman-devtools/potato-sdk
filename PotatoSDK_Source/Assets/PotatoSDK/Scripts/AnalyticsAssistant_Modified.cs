@@ -26,6 +26,14 @@ using ByteBrewSDK;
 #endif
 public partial class AnalyticsAssistant
 {
+    /// <summary>
+    /// Edit this function in a way so this can return your current level number
+    /// It should look something like: 
+    /// get 
+    /// { 
+    ///     return LevelManager.CurrentLevelNumber;
+    /// }
+    /// </summary>
     public static int SelectedLevelNumber
     {
         get
@@ -35,6 +43,15 @@ public partial class AnalyticsAssistant
         }
 
     }
+    //======================================================================================================
+
+
+
+
+
+
+
+
     //public static void ReportClick(AnalyticClickType type, int levelNumber, string param = "")
     //{
 

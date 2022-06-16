@@ -60,7 +60,7 @@ namespace PotatoSDK
             }
             $"RV Show - {placement}".Log(LOG_ANALYTIC_COLOR);
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoShow(placement: placement, network: "unknown", level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoShow(placement: placement, network: "unknown", level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
             if (!MaxSdk.IsRewardedAdReady(adUnitId))
             {
@@ -74,7 +74,11 @@ namespace PotatoSDK
 
             MaxSdk.ShowRewardedAd(adUnitId,placement:placement);
         }
-        public bool IsReady()
+        public bool IsAdReady()
+        {
+            return MaxSdk.IsRewardedAdReady(adUnitId) && !requestPending;
+        }
+        public bool IsAdContentReady()
         {
             return MaxSdk.IsRewardedAdReady(adUnitId);
         }
@@ -111,7 +115,7 @@ namespace PotatoSDK
             retryAttempt = 0;
             $"RV loaded".Log(LOG_ANALYTIC_COLOR);
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoLoad(placement: COMMON_PLACEMENT, network: adInfo.NetworkName,level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoLoad(placement: COMMON_PLACEMENT, network: adInfo.NetworkName,level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 
@@ -129,7 +133,7 @@ namespace PotatoSDK
             //mono.Invoke("LoadRewardedAd", (float)retryDelay);
             $"RV load failed".Log("FF00FF");
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoLoadFail(level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoLoadFail(level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 
@@ -139,7 +143,7 @@ namespace PotatoSDK
 
             $"RV start - {placement}".Log(LOG_ANALYTIC_COLOR);
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoStart(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoStart(placement: placement, network: adInfo.NetworkName, level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 
@@ -153,7 +157,7 @@ namespace PotatoSDK
 
             $"RV Show failed - {placement}".Log("FF00FF");
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoShowFail(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoShowFail(placement: placement, network: adInfo.NetworkName, level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 
@@ -168,7 +172,7 @@ namespace PotatoSDK
 
             $"RV hidden/end- {placement}".Log(LOG_ANALYTIC_COLOR);
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoEnd(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoEnd(placement: placement, network: adInfo.NetworkName, level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 
@@ -176,7 +180,7 @@ namespace PotatoSDK
         {
             $"RV clicked- {placement}".Log(LOG_ANALYTIC_COLOR);
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoClick(placement: placement, network: adInfo.NetworkName, level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoClick(placement: placement, network: adInfo.NetworkName, level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 
@@ -188,7 +192,7 @@ namespace PotatoSDK
 
             $"RV collected- {placement}".Log(LOG_ANALYTIC_COLOR);
 #if POTATO_LION_ANALYTICS
-            LionAnalytics.RewardVideoCollect(placement: placement, level: LionAnalyticsMan.SelectedLevelNumber);
+            LionAnalytics.RewardVideoCollect(placement: placement, level: AnalyticsAssistant.SelectedLevelNumber);
 #endif
         }
 

@@ -24,6 +24,7 @@ namespace PotatoSDK
 
         public static bool hasConsent { get; private set; }
         static System.Action<bool> onInitializationCallback;
+        static System.Action onPotatoIsReady;
 
         static GameObject potatoGo;
                
@@ -163,6 +164,8 @@ namespace PotatoSDK
                 yield return new WaitForSeconds(0.5f);
                 if (!skipAutoLoadNextScene)
                 {
+                    IsReady = true;
+                    onPotatoIsReady?.Invoke();
                     if (autoLoadSceneIndex > 0)
                     {
                         SceneManager.LoadScene(autoLoadSceneIndex);
@@ -172,9 +175,19 @@ namespace PotatoSDK
                         SceneManager.LoadScene(1);
                     }
                 }
+                else
+                {
+                    IsReady = true;
+                    onPotatoIsReady?.Invoke();
+                }
+            }
+            else 
+            {
+                IsReady = true;
+                onPotatoIsReady?.Invoke();
             }
 
-            IsReady = true;
+
             if (!potato.disablePotatoLogs) ("Potato Is Ready").Log(LogColorCode);
         }
 
@@ -188,6 +201,18 @@ namespace PotatoSDK
             else
             {
                 onInitializationCallback += onConfirmed;
+            }
+        }
+
+        public static void ExecuteWhenPotatoReady(System.Action onReady)
+        {
+            if (IsReady)
+            {
+                onReady?.Invoke();
+            }
+            else
+            {
+                onPotatoIsReady += onReady;
             }
         }
     }

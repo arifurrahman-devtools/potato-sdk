@@ -2,19 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if POTATO_LION_ANALYTICS
+using LionStudios.Suite.Analytics;
+#if UNITY_EDITOR
+using LionStudios.Suite.Debugging;
+#endif
+#endif
 namespace PotatoSDK
 {
     public class LionAnalyticsMan : MonoBehaviour, IPotatoInitiatable
     {
-        public static int SelectedLevelNumber
-        {
-            get
-            {
-                Debug.LogError("Please edit this property to provide the current level number for your game");
-                return 9999;
-            }
 
-        }
         public string LogColorCode => "FFFF00";
 
         public bool IsReady { get; set; }

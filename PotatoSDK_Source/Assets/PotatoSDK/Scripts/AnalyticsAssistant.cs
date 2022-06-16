@@ -35,26 +35,41 @@ public partial class AnalyticsAssistant : MonoBehaviour , IPotatoInitiatable
     {
         logDisabled = true;
     }
+    Action<IPotatoInitiatable> onModuleReadyToUse;
     void IPotatoInitiatable.InitializeSuperEarly(bool hasConsent, Action<IPotatoInitiatable> onModuleReadyToUse)
     {
         IsReady = true;
-        onModuleReadyToUse?.Invoke(this);
+        this.onModuleReadyToUse = onModuleReadyToUse;
 
         Log("Analytics Assistant Initialized1");
-        Potato.ExecuteWhenPotatoReady(() => {
-            Log("Analytics Assistant Initialized2");
+#if POTATO_GAME_ANALYTICS      
+        if (GameAnalyticsMan.Instance.IsReady)
+        {
+            LionInit();
+        }
+        else
+        {
+            GameAnalyticsMan.onAnalyticsReady += LionInit;
+        }
+#else
+            LionInit();
+#endif
+
+    }
+    void LionInit()
+    {
 #if POTATO_LION_ANALYTICS
 #if UNITY_EDITOR
-            LionDebugger.Hide();
+        LionDebugger.Hide();
 #endif
 
 
-            LionAnalytics.GameStart();
+        LionAnalytics.GameStart();
 
 #endif
-            Instance = this;
-            Log("Analytics Assistant Initialized");
-        });
+        Instance = this;
+        Log("Analytics Assistant Initialized");
+        onModuleReadyToUse?.Invoke(this);
     }
 
 #if POTATO_GAME_ANALYTICS || POTATO_LION_ANALYTICS || POTATO_BYTEBREW
