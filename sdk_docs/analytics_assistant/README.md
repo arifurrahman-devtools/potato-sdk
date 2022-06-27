@@ -1,25 +1,25 @@
 [Go Back To Main Page](../../README.md)
-## GameAnalytics Integration:
-* Get the latest Game Analytics unity sdk from: [here](https://download.gameanalytics.com/unity/GA_SDK_UNITY.unitypackage). 
-* Import the SDK and Activate PotatoSDK Game AnalyticsWrapper
-* Goto `Window/GameAnalytics/Select Settings`
-* Login with 
-    * id: 1dev.potato@gmail.com
-    * pass: G3n1u5inside
-* Add platform with android selected(you can add ios as well when applicable or you can do this before building for iOS). And fill it in like the screen shot
-    * Game should be your game name, the keys will autofill.
-    
-      ![GA setup](img_0.png) 
-    * Alternatively you can enter the game key and secret key only provided by your PM
+## Analytics SDK Integration:
+You can follow the relevant sections from the main doc page to find instructions regarding integrating individual SDKS. (GA, ByteBrew, Lion etc..)
 
-### Testing GameAnalytics Integration:
-* Enable Test Analytics in your GA wrapper of PotatoSDK
-* Build and run
-* Goto https://go.gameanalytics.com/home and login (same credentials)
-    * Find your app and go to live feed
-    * Search for testevent or timepassed design event  in the page.
-    ![GA test](img_1.png)  
-* Disable Test Analytics when you are done testing
+## Managing Analytics:
+* The analytics platforms that are used for games are constantly changing. On the other hand,  specific calls and its format can vary from game to game. The number of platform to be targeted for a specific analytics call can vary between diffrent types of analytics calls. Thus, for analytics calls you will have to make your calls according to the documentation of each SDK that you need (Potato SDK does have a minimal wrapper for common analytics calls, however you should know which specific calls to make and if the wrapper does that. PotatoSDK will handle initialization of  the SDKs). You need to`verify with your PM` which analytics logs you need to send (and to which platform). As of `27/06/22` we are only required to make calls using  “Lion Analytics” and "ByteBrew". 
+
+* PotatoSDK provides a loading `splash scene` which **is recommended** to use. Depending on whether you are using it or not you have
+  * **Without Loading Scene:**  You have to make sure that the `Potato.isReady` flag is true before making any calls on LionAnalytics.
+  * **With Loading Scene:** In this case you can safely make the calls to Any Analytics from any scene loaded afterward. But if you choose to extend the provided loading scene and make calls inside the loading scene, you still have to check if `Potato.isReady` is true.
+
+## Analytics Assistant
+Potato SDK provides a Analytics Assistant, which is optional to use and contains some predefined set of analytics calls. Also Lion RV analytics module directly depend on this module to provide current level numbers. 
+
+### Making Use of Analytics Assistant
+* Enable The Analytics Assistant Module from Potato SDK
+* Edit the script named `AnalyticsAssistant_Modified` to make sure the property shown in the image returns your current level number (In case you ever reimport PotatoSDK, uncheck this from import list) 
+   ![Edit Script](img_1.png) 
+* The enabled module contains some basic Analytics calls like: LevelStart, LevelComplete etc. You can call them in the following format: `AnalyticsAssistant.Instance.LevelStarted()`
+* The PotatoSDK module of Analytics Assistant contains some toggles which works on predefined functions only.
+   ![Toggles](img_2.png) 
+* You can use the `AnalyticsAssistant_Modified` script to add your own analytics script. you can follow the functions to get an idea
 
 
 [Go Back To Main Page](../../README.md)
