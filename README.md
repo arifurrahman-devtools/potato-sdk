@@ -77,13 +77,14 @@ If any of the situations arise please make sure you do the following:
 ## SDK and Feature specific walkthrough
 
 ### About Analytics:
-The analytics platforms that are used for games are constantly changing. On the other hand,  specific calls and its format can vary from game to game. The number of platform to be targeted for a specific analytics call can vary between diffrent types of analytics calls. Thus, for analytics calls you will have to make your calls according to the documentation of each SDK that you need (Potato SDK does have a minimal wrapper for common analytics calls, however you should know which specific calls to make and if the wrapper does that. PotatoSDK will handle initialization of  the SDKs). You need to`verify with your PM` which analytics logs you need to send (and to which platform). As of `27/06/22` we are only required to make calls using  “Lion Analytics” and "ByteBrew". 
+The analytics platforms that are used for games are constantly changing. On the other hand,  specific calls and its format can vary from game to game. The number of platform to be targeted for a specific analytics call can vary between diffrent types of analytics calls. Thus, for analytics calls you will have to make your calls according to the documentation of each SDK that you need (Potato SDK does have a minimal wrapper for common analytics calls, however you should know which specific calls to make and if the wrapper does that. PotatoSDK will handle initialization of  the SDKs). You need to`verify with your PM` which analytics logs you need to send (and to which platform). As of `27/06/22` we are only required to make calls using  “Lion Analytics” and "ByteBrew". The support that is provided currently is detailed here: 
 
-##### About Lion Analytics and PotatoSDK:
-Potato SDK does not contain a wrapper for Lion Analytics. If you need to use Lion Analytics you have to follow the most current guidelines provided by Lion (ask your PM).  However, while using the Lion Analytics with PotatoSDK as of  `29/10/21`, the following rules apply,
-* PotatoSDK provides a loading `splash scene` which **is recommended** to use. Depending on whether you are using it or not you have
-  * **Without Loading Scene:**  You have to make sure that the `Potato.isReady` flag is true before making any calls on LionAnalytics.
-  * **With Loading Scene:** In this case you can safely make the calls to LionAnalytics on any scene loaded afterward. But if you choose to extend the provided loading scene, you still have to check if `Potato.isReady` is true.
+[Analytics Assistant](sdk_docs/analytics_assistant/README.md)
+
+#### About Analytics PotatoSDK Loading Scene:
+PotatoSDK provides a loading `splash scene` which **is recommended** to use. Depending on whether you are using it or not you have
+* **Without Loading Scene:**  You have to make sure that the `Potato.isReady` flag is true before making any calls on any analytics.
+* **With Loading Scene:** In this case you can safely make the calls to any analytics on any scene loaded afterward. But if you choose to extend the provided loading scene, you still have to check if `Potato.isReady` is true.
 ---
 ### SDK Walkthroughs
 Here are links to specific integration and testing walkthroughs. The SDKs in question are primarily documented for the android platform, additional steps for iOS are noted in the next section.
