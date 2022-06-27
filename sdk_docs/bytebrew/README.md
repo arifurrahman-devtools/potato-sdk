@@ -1,25 +1,13 @@
 [Go Back To Main Page](../../README.md)
 ## GameAnalytics Integration:
-* Get the latest Game Analytics unity sdk from: [here](https://download.gameanalytics.com/unity/GA_SDK_UNITY.unitypackage). 
+* Get the latest sdk from: [here](https://github.com/ByteBrewIO/ByteBrewUnitySDK). Use the latest.
 * Import the SDK and Activate PotatoSDK Game AnalyticsWrapper
-* Goto `Window/GameAnalytics/Select Settings`
-* Login with 
-    * id: 1dev.potato@gmail.com
-    * pass: G3n1u5inside
-* Add platform with android selected(you can add ios as well when applicable or you can do this before building for iOS). And fill it in like the screen shot
-    * Game should be your game name, the keys will autofill.
-    
-      ![GA setup](img_0.png) 
-    * Alternatively you can enter the game key and secret key only provided by your PM
+* Goto `Window/ByteBrew/Select ByteBrew Settings`
+* Enable android or iOS settings
+* Add your game ID and SDK key from your project manager
 
 ### Testing GameAnalytics Integration:
-* Enable Test Analytics in your GA wrapper of PotatoSDK
-* Build and run
-* Goto https://go.gameanalytics.com/home and login (same credentials)
-    * Find your app and go to live feed
-    * Search for testevent or timepassed design event  in the page.
-    ![GA test](img_1.png)  
-* Disable Test Analytics when you are done testing
+* ask your project manager "log jai kina"
 
 
 [Go Back To Main Page](../../README.md)
