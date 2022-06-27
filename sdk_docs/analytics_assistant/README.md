@@ -15,10 +15,10 @@ Potato SDK provides a Analytics Assistant, which is optional to use and contains
 ### Making Use of Analytics Assistant
 * Enable The Analytics Assistant Module from Potato SDK
 * Edit the script named `AnalyticsAssistant_Modified` to make sure the property shown in the image returns your current level number (In case you ever reimport PotatoSDK, uncheck this from import list) 
-   ![Edit Script](img_1.png) 
+   ![Edit Script](img_1.PNG) 
 * The enabled module contains some basic Analytics calls like: LevelStart, LevelComplete etc. You can call them in the following format: `AnalyticsAssistant.Instance.LevelStarted()`
 * The PotatoSDK module of Analytics Assistant contains some toggles which works on predefined functions only.
-   ![Toggles](img_2.png) 
+   ![Toggles](img_0.PNG) 
 * You can use the `AnalyticsAssistant_Modified` script to add your own analytics script. you can follow the functions to get an idea
 
 
