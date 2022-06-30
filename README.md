@@ -29,7 +29,20 @@ This repository is maintained with the motivation of making SDK integration easi
   * Game orientation is in portrait (or whichever is applicable for your game)
   * (Android) Scripting backend =  IL2CPP
   * (Android) target architectures = armv7 and arm64
-  * (Android) target API level = 30 (as of 06/12/21, get confirmation from your Product Manager)
+  * (Android) target API level = 31 (31 is needed for MAXSDK v5.4+)
+  * (Android) Enable your custom "launcherTemplate.gradle" file and add the following snippet at the end of the file [you can see the image for reference]  
+  ```
+  configurations.all {
+    resolutionStrategy {
+      force 'androidx.core:core:1.6.0'
+      force 'androidx.core:core-ktx:1.6.0'
+    }
+  }
+  ```
+  ![splash screen control](readme_images/launcher_template_0.png)
+  
+  * (Android) Edit the android manifest according to the following image. 
+  ![splash screen control](readme_images/intent_filter_0.png)
   * (Android) Sign your application and create a signed build. 
   * (Android) If you have an android manifest you should change the debuggable attribute to false
 * While copying IDs or keys (e.g. ad unit ID, app token etc) make sure to check for white space characters on both end of the key
