@@ -31,7 +31,7 @@ This repository is maintained with the motivation of making SDK integration easi
   * (Android) target architectures = armv7 and arm64
   * (Android) target API level = 31 (31 is needed for MAXSDK v5.4+)
   
-  * (Android) Edit the android manifest according to the following image. 
+  * (Android) Edit the android manifest according to the following image. But you can use `android:exported= "true"` to be on the safe side.
   ![splash screen control](readme_images/intent_filter_0.png)
   * (Android) Sign your application and create a signed build. 
   * (Android) If you have an android manifest you should change the debuggable attribute to false
