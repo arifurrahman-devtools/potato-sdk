@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if POTATO_GAME_ANALYTICS
 using GameAnalyticsSDK;
+#endif
 //using FRIA;
 
 namespace PotatoSDK
