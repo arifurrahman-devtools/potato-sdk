@@ -30,18 +30,8 @@ This repository is maintained with the motivation of making SDK integration easi
   * (Android) Scripting backend =  IL2CPP
   * (Android) target architectures = armv7 and arm64
   * (Android) target API level = 31 (31 is needed for MAXSDK v5.4+)
-  * (Android) Enable your custom "launcherTemplate.gradle" file and add the following snippet at the end of the file [you can see the image for reference]  
-  ```
-  configurations.all {
-    resolutionStrategy {
-      force 'androidx.core:core:1.6.0'
-      force 'androidx.core:core-ktx:1.6.0'
-    }
-  }
-  ```
-  ![splash screen control](readme_images/launcher_template_0.png)
   
-  * (Android) Edit the android manifest according to the following image. 
+  * (Android) Edit the android manifest according to the following image. But you can use `android:exported= "true"` to be on the safe side.
   ![splash screen control](readme_images/intent_filter_0.png)
   * (Android) Sign your application and create a signed build. 
   * (Android) If you have an android manifest you should change the debuggable attribute to false
