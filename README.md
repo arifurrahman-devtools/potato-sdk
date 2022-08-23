@@ -21,7 +21,7 @@ This repository is maintained with the motivation of making SDK integration easi
 
 ## Getting Started
 #### Environment Setup
-* Make sure you are using minimum recommended Unity version: 2021.1.16f1
+* Make sure you are using minimum recommended Unity version: 2021.1.16f1, (2022.1.7f1 is also tested and stable with current SDKs)
 * Setup your project properly at the beginning (to avoid future complications)
   * packageName or bundleID.  
   * Version and bundle version code (both will change with submissions)
