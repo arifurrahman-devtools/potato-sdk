@@ -78,7 +78,7 @@ public partial class AnalyticsAssistant : MonoBehaviour , IPotatoInitiatable
     public bool gameAnalytics_logsEnabled = true;
 #endif
 #if POTATO_LION_ANALYTICS
-  public bool lionAnalytics_logsEnabled = true;
+    public bool lionAnalytics_logsEnabled = true;
 #endif
 
 #if POTATO_BYTEBREW
@@ -91,7 +91,11 @@ public partial class AnalyticsAssistant : MonoBehaviour , IPotatoInitiatable
     {
         Log($"started {SelectedLevelNumber}");
 #if POTATO_BYTEBREW
-        if (byteBrew_logsEnabled) ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Started, "level", SelectedLevelNumber.ToString());
+        if (byteBrew_logsEnabled)
+        {
+            ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Started, "level", SelectedLevelNumber.ToString());
+            ByteBrew.NewCustomEvent("LevelStarted", $"level={SelectedLevelNumber};");
+        }
 #endif
 #if POTATO_LION_ANALYTICS
         if (lionAnalytics_logsEnabled) LionAnalytics.LevelStart(SelectedLevelNumber, 1);
@@ -104,7 +108,11 @@ public partial class AnalyticsAssistant : MonoBehaviour , IPotatoInitiatable
     {
         Log($"completed {SelectedLevelNumber}");
 #if POTATO_BYTEBREW
-        if (byteBrew_logsEnabled) ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Completed, "level", SelectedLevelNumber.ToString());
+        if (byteBrew_logsEnabled)
+        {
+            ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Completed, "level", SelectedLevelNumber.ToString());
+            ByteBrew.NewCustomEvent("LevelCompleted", $"level={SelectedLevelNumber};");
+        }
 #endif
 #if POTATO_LION_ANALYTICS
         if (lionAnalytics_logsEnabled) LionAnalytics.LevelComplete(SelectedLevelNumber, 1);
@@ -117,7 +125,11 @@ public partial class AnalyticsAssistant : MonoBehaviour , IPotatoInitiatable
     {
         Log($"failed {SelectedLevelNumber}");
 #if POTATO_BYTEBREW
-        if (byteBrew_logsEnabled) ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Failed, "level", SelectedLevelNumber.ToString());
+        if (byteBrew_logsEnabled)
+        {
+            ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Failed, "level", SelectedLevelNumber.ToString());
+            ByteBrew.NewCustomEvent("LevelFailed", $"level={SelectedLevelNumber};");
+        }
 #endif
 #if POTATO_LION_ANALYTICS
         if (lionAnalytics_logsEnabled) LionAnalytics.LevelFail(SelectedLevelNumber, 1);
@@ -130,7 +142,11 @@ public partial class AnalyticsAssistant : MonoBehaviour , IPotatoInitiatable
     {
         Log($"restarted {SelectedLevelNumber}");
 #if POTATO_BYTEBREW
-        if (byteBrew_logsEnabled) ByteBrew.NewCustomEvent( "Restart",$"Level_{SelectedLevelNumber}");
+        if (byteBrew_logsEnabled)
+        {
+            ByteBrew.NewCustomEvent("Restart", $"Level_{SelectedLevelNumber}");
+            ByteBrew.NewCustomEvent("LevellRestart", $"level={SelectedLevelNumber};");
+        }
 #endif
 #if POTATO_LION_ANALYTICS
         if (lionAnalytics_logsEnabled) LionAnalytics.LevelRestart(SelectedLevelNumber, 1);
