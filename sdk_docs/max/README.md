@@ -11,14 +11,10 @@
       
       ![apploving integration manager](img_0.png)
     * Install all the ad network plugins that you are required to 
-        * Admob: you will need additional key for admob
-        * Facebook: you need to follow the following steps for facebook
-            * You will need to add a new attribute `“android:networkSecurityConfig="@xml/network_security_config””` in the main Android Manifest. The new attribute should be added inside the application element at the end of the current attributes already there.  It should be something like this in the end
-              ```
-              <application android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:icon="@drawable/app_icon" 
-              android:label="@string/app_name" android:debuggable="false" android:networkSecurityConfig="@xml/network_security_config">
-              ```
-            * Also you will need to move or copy  the folder named “res” inside “Assets/PotatoSDK/CopyContentsToPlugins_Android” to “Assets/Plugins/Android” with its contents
+        * Admob: You will need additional key for admob
+        * Facebook: The following steps for Facebook mediated network is now obsolete [You dont need to do anything in this step, If you have already done the below written step and are running a version of Unity greater than or equal 2022.1.1, Please undo this!]
+            * ~~You will need to add a new attribute `“android:networkSecurityConfig="@xml/network_security_config””` in the main Android Manifest. The new attribute should be added inside the application element at the end of the current attributes already there.  It should be something like this in the end~~
+            * ~~Also you will need to move or copy  the folder named “res” inside “Assets/PotatoSDK/CopyContentsToPlugins_Android” to “Assets/Plugins/Android” with its contents~~
 * Delete resolved libraries and Resolve again (when you are done making changes to max mediated network plugins)
 * Activate PotatoSDK MAX Wrapper
 * Enter ad unit id for relevant ads. (you must enter ID if you want to use that kind of ad. But you can leave it blank if you are not using)
